@@ -2,34 +2,38 @@
 
 <!-- toc -->
 
-- [Première partie : à propos de WordPress](#premiere-partie--a-propos-de-wordpress)
-  * [Que-est ce que c'est wordpress ?](#que-est-ce-que-cest-wordpress-)
-  * [Automattic](#automattic)
-  * [Q&A](#qa)
-  * [Qu'est-ce que c'est qu'un CMS ?](#quest-ce-que-cest-quun-cms-)
-- [Deuxième partie : installation locale](#deuxieme-partie--installation-locale)
-  * [installation sur un Ubuntu 23.10 - Version longue](#installation-sur-un-ubuntu-2310---version-longue)
-    + [01 - Prérequis](#01---prerequis)
-    + [02 - Création de la base de données MySQL](#02---creation-de-la-base-de-donnees-mysql)
-    + [03 - Installation de WordPress](#03---installation-de-wordpress)
-    + [04 - Finalisation de l'installation](#04---finalisation-de-linstallation)
-  * [installation sur un Ubuntu 23.10 - Version courte (Docker)](#installation-sur-un-ubuntu-2310---version-courte-docker)
-    + [01 - Installation de Docker](#01---installation-de-docker)
-    + [02 - Vérification du status de docker](#02---verification-du-status-de-docker)
-    + [03 - Configuration de Docker pour WordPress](#03---configuration-de-docker-pour-wordpress)
-    + [04 - Lancement de WordPress avec Docker](#04---lancement-de-wordpress-avec-docker)
-    + [Références](#references)
-    + [De quoi WordPress a-t-il besoin pour fonctionner ?](#de-quoi-wordpress-a-t-il-besoin-pour-fonctionner-)
-- [Troisième partie : installation distante](#troisieme-partie--installation-distante)
-  * [Procédure d’installation de WordPress sur une VM distante](#procedure-dinstallation-de-wordpress-sur-une-vm-distante)
-    + [1. Connexion à la machine virtuelle distante](#1-connexion-a-la-machine-virtuelle-distante)
-    + [2. Mise à jour du système](#2-mise-a-jour-du-systeme)
-    + [3. Installation des prérequis](#3-installation-des-prerequis)
-    + [4. Configuration de la base de données MySQL](#4-configuration-de-la-base-de-donnees-mysql)
-    + [5. Téléchargement et configuration de WordPress](#5-telechargement-et-configuration-de-wordpress)
-    + [6. Configuration du serveur web](#6-configuration-du-serveur-web)
-    + [7. Finalisation de l'installation](#7-finalisation-de-linstallation)
-  * [Source :](#source-)
+- [Table of Contents](#table-of-contents)
+- [Première partie : à propos de WordPress](#première-partie--à-propos-de-wordpress)
+  - [Que-est ce que c'est wordpress ?](#que-est-ce-que-cest-wordpress-)
+  - [Automattic](#automattic)
+  - [Q\&A](#qa)
+  - [Qu'est-ce que c'est qu'un CMS ?](#quest-ce-que-cest-quun-cms-)
+- [Deuxième partie : installation locale](#deuxième-partie--installation-locale)
+  - [installation sur un Ubuntu 23.10 - Version longue](#installation-sur-un-ubuntu-2310---version-longue)
+    - [01 - Prérequis](#01---prérequis)
+    - [02 - Création de la base de données MySQL](#02---création-de-la-base-de-données-mysql)
+    - [03 - Installation de WordPress](#03---installation-de-wordpress)
+    - [04 - Finalisation de l'installation](#04---finalisation-de-linstallation)
+  - [installation sur un Ubuntu 23.10 - Version courte (Docker)](#installation-sur-un-ubuntu-2310---version-courte-docker)
+    - [01 - Installation de Docker](#01---installation-de-docker)
+    - [02 - Vérification du status de docker](#02---vérification-du-status-de-docker)
+    - [03 - Configuration de Docker pour WordPress](#03---configuration-de-docker-pour-wordpress)
+    - [04 - Lancement de WordPress avec Docker](#04---lancement-de-wordpress-avec-docker)
+    - [Références](#références)
+    - [De quoi WordPress a-t-il besoin pour fonctionner ?](#de-quoi-wordpress-a-t-il-besoin-pour-fonctionner-)
+- [Troisième partie : installation distante](#troisième-partie--installation-distante)
+  - [Procédure d’installation de WordPress sur une VM distante](#procédure-dinstallation-de-wordpress-sur-une-vm-distante)
+    - [1. Connexion à la machine virtuelle distante](#1-connexion-à-la-machine-virtuelle-distante)
+    - [2. Mise à jour du système](#2-mise-à-jour-du-système)
+    - [3. Installation des prérequis](#3-installation-des-prérequis)
+    - [4. Configuration de la base de données MySQL](#4-configuration-de-la-base-de-données-mysql)
+    - [5. Téléchargement et configuration de WordPress](#5-téléchargement-et-configuration-de-wordpress)
+    - [6. Configuration du serveur web](#6-configuration-du-serveur-web)
+    - [7. Finalisation de l'installation](#7-finalisation-de-linstallation)
+  - [À la découverte de WordPress](#à-la-découverte-de-wordpress)
+    - [Copie d’écran d'une partie du site :](#copie-décran-dune-partie-du-site-)
+    - [Que manque-t-il pour que mon site soit opérationnel ?](#que-manque-t-il-pour-que-mon-site-soit-opérationnel-)
+  - [Source :](#source-)
 
 <!-- tocstop -->
 
@@ -309,9 +313,62 @@ sudo systemctl restart apache2
 
 ### 7. Finalisation de l'installation
 
-Dans votre navigateur web, accédez à l'adresse IP de votre machine virtuelle. Vous devriez voir l'assistant d'installation de WordPress. Suivez les instructions à l'écran pour terminer l'installation en fournissant les informations nécessaires.
+Dans votre navigateur web, accédez à l'adresse IP + le nom du repertoire ou ce trouve wordpress de votre machine virtuelle. Vous devriez voir l'assistant d'installation de WordPress. Suivez les instructions à l'écran pour terminer l'installation en fournissant les informations nécessaires.
 
----
+## À la découverte de WordPress
+1. **Différence entre un post et une page :**
+    - **Post :** Un post est un contenu dynamique et fréquemment mis à jour, généralement affiché en ordre chronologique sur votre site. Les posts sont souvent utilisés pour des articles de blog ou des mises à jour régulières.
+    - **Page :** Une page est un contenu statique et permanent, généralement utilisé pour des informations intemporelles telles que "À propos", "Contact" ou "Services". Les pages ne sont pas liées à une chronologie et restent généralement accessibles depuis le menu de navigation de votre site.
+    
+2. **Installer et changer les thèmes :**
+    - Pour installer un nouveau thème, vous allez dans "Apparence" -> "Thèmes" dans votre tableau de bord WordPress, puis cliquez sur "Ajouter" pour télécharger un nouveau thème depuis le répertoire de thèmes WordPress ou depuis votre propre ordinateur.
+    - Pour changer de thème, il vous suffit de cliquer sur "Activer" sur le thème que vous souhaitez utiliser parmi ceux installés.
+
+3. **Installer et changer les plugins :**
+    - Pour installer un nouveau plugin, allez dans "Extensions" -> "Ajouter" dans votre tableau de bord WordPress, puis recherchez le plugin souhaité dans le répertoire WordPress ou téléchargez-le depuis votre propre ordinateur.
+    - Pour changer les plugins activés, allez dans "Extensions" -> "Extensions installées", puis activez, désactivez ou supprimez les plugins selon vos besoins.
+
+4. **Écosystème des plugins et des thèmes :**
+    - L'écosystème des plugins et des thèmes WordPress est vaste et varié, avec des milliers de thèmes et de plugins disponibles sur le répertoire WordPress officiel ainsi que sur d'autres sites tiers. Ces thèmes et plugins sont créés par des développeurs du monde entier pour étendre les fonctionnalités et personnaliser l'apparence de votre site WordPress.
+
+5. **Utiliser le menu :**
+    - Pour créer un menu de navigation, allez dans "Apparence" -> "Menus", puis créez un nouveau menu en ajoutant des éléments tels que des pages, des articles, des liens personnalisés, etc.
+    - Vous pouvez personnaliser l'ordre et la structure de votre menu en faisant glisser et déposer les éléments, puis en les enregistrant une fois terminé.
+
+6. **Assigner un menu à un emplacement du thème :**
+    - Une fois que vous avez créé votre menu, vous pouvez l'assigner à un emplacement spécifique dans votre thème en allant dans "Apparence" -> "Menus" et en sélectionnant l'emplacement désiré dans les options de placement du menu.
+
+7. **Visiter le menu settings (URL Rewriting, etc.) :**
+    - Vous pouvez accéder aux réglages des permaliens et d'autres paramètres importants en allant dans "Réglages" -> "Permaliens" dans votre tableau de bord WordPress. C'est là que vous pouvez personnaliser la structure des URL de votre site, ce qui peut avoir un impact significatif sur le référencement et l'expérience utilisateur.
+
+8. **Utiliser les catégories et les tags, ainsi que leurs pages :**
+    - Les catégories et les tags sont des taxonomies utilisées pour organiser votre contenu. Vous pouvez les gérer en allant dans "Articles" -> "Catégories" ou "Articles" -> "Tags" dans votre tableau de bord WordPress. Chaque catégorie et tag a sa propre page d'archive qui affiche tous les articles associés.
+
+9. **SEO et Excerpt :**
+    - Le SEO (Search Engine Optimization) désigne l'ensemble des techniques visant à améliorer le classement d'un site web dans les résultats des moteurs de recherche. L'excerpt est un résumé de votre contenu qui est souvent utilisé dans les pages d'archives ou les résultats de recherche pour donner un aperçu du contenu complet. Un bon excerpt est important pour inciter les utilisateurs à cliquer et pour améliorer le référencement de votre contenu.
+
+### Copie d’écran d'une partie du site :
+
+![screen1](./images/wordpressSiteScreenShot1.png)
+
+![screen2](./images/wordpressSiteScreenShot2.png)
+
+### Que manque-t-il pour que mon site soit opérationnel ?
+Pour rendre votre site pleinement opérationnel et prêt à accueillir un trafic significatif, voici ce dont vous pourriez avoir besoin :
+
+1. **Hébergement fiable :** Assurez-vous d'avoir un hébergement web fiable et évolutif qui peut gérer un trafic accru sans compromettre les performances de votre site. Vous pouvez opter pour un hébergement partagé, un VPS (serveur privé virtuel) ou même un hébergement cloud en fonction de vos besoins et de votre budget.
+    
+2. **Sécurité renforcée :** Protégez votre site contre les attaques malveillantes en installant des plugins de sécurité, en utilisant des certificats SSL pour le cryptage des données et en mettant en place des mesures de sécurité telles que la vérification en deux étapes et la surveillance des journaux d'accès.
+    
+3. **Optimisation des performances :** Assurez-vous que votre site est rapide et réactif en optimisant les images, en minimisant les requêtes HTTP, en mettant en cache le contenu statique et en utilisant un CDN (Content Delivery Network) pour distribuer votre contenu à travers le monde.
+    
+4. **Sauvegardes régulières :** Mettez en place un système de sauvegarde automatique pour protéger vos données en cas de panne du serveur, de piratage ou de perte de données accidentelle. Stockez les sauvegardes sur un emplacement distant sécurisé pour une sécurité supplémentaire.
+    
+5. **Gestion de la montée en charge :** Anticipez la croissance de votre site en mettant en place des solutions de mise à l'échelle automatique qui peuvent gérer un trafic accru sans nécessiter d'intervention manuelle. Cela peut inclure l'utilisation de services cloud extensibles ou l'ajout de capacité de serveur supplémentaire en cas de besoin.
+    
+6. **Suivi des performances :** Utilisez des outils d'analyse web pour surveiller les performances de votre site, y compris le temps de chargement des pages, le taux de rebond, les conversions et d'autres métriques clés. Utilisez ces données pour identifier les domaines à améliorer et optimiser continuellement votre site.
+    
+7. **Support technique :** Assurez-vous d'avoir un plan de support technique en place pour résoudre rapidement les problèmes techniques et répondre aux questions des utilisateurs. Cela peut inclure un support par e-mail, un chat en direct ou même un support téléphonique en fonction de vos besoins et de vos ressources disponibles.
 
 ## Source :
 
