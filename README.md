@@ -2,34 +2,34 @@
 
 <!-- toc -->
 
-- [Table of Contents](#table-of-contents)
-- [Première partie : à propos de WordPress](#première-partie--à-propos-de-wordpress)
-  - [Que-est ce que c'est wordpress ?](#que-est-ce-que-cest-wordpress-)
-  - [Q\&A](#qa)
-  - [Qu'est-ce que c'est qu'un CMS ?](#quest-ce-que-cest-quun-cms-)
-- [Deuxième partie : installation locale](#deuxième-partie--installation-locale)
-  - [installation sur un Ubuntu 23.10 - Version longue](#installation-sur-un-ubuntu-2310---version-longue)
-    - [01 - Prérequis](#01---prérequis)
-    - [02 - Création de la base de données MySQL](#02---création-de-la-base-de-données-mysql)
-    - [03 - Installation de WordPress](#03---installation-de-wordpress)
-    - [04 - Finalisation de l'installation](#04---finalisation-de-linstallation)
-  - [installation sur un Ubuntu 23.10 - Version courte (Docker)](#installation-sur-un-ubuntu-2310---version-courte-docker)
-    - [01 - Installation de Docker](#01---installation-de-docker)
-    - [02 - Vérification du status de docker](#02---vérification-du-status-de-docker)
-    - [03 - Configuration de Docker pour WordPress](#03---configuration-de-docker-pour-wordpress)
-    - [04 - Lancement de WordPress avec Docker](#04---lancement-de-wordpress-avec-docker)
-    - [Références](#références)
-    - [De quoi WordPress a-t-il besoin pour fonctionner ?](#de-quoi-wordpress-a-t-il-besoin-pour-fonctionner-)
-- [Troisième partie : installation distante](#troisième-partie--installation-distante)
-  - [Procédure d’installation de WordPress sur une VM distante](#procédure-dinstallation-de-wordpress-sur-une-vm-distante)
-    - [1. Connexion à la machine virtuelle distante](#1-connexion-à-la-machine-virtuelle-distante)
-    - [2. Mise à jour du système](#2-mise-à-jour-du-système)
-    - [3. Installation des prérequis](#3-installation-des-prérequis)
-    - [4. Configuration de la base de données MySQL](#4-configuration-de-la-base-de-données-mysql)
-    - [5. Téléchargement et configuration de WordPress](#5-téléchargement-et-configuration-de-wordpress)
-    - [6. Configuration du serveur web](#6-configuration-du-serveur-web)
-    - [7. Finalisation de l'installation](#7-finalisation-de-linstallation)
-  - [Source :](#source-)
+- [Première partie : à propos de WordPress](#premiere-partie--a-propos-de-wordpress)
+  * [Que-est ce que c'est wordpress ?](#que-est-ce-que-cest-wordpress-)
+  * [Automattic](#automattic)
+  * [Q&A](#qa)
+  * [Qu'est-ce que c'est qu'un CMS ?](#quest-ce-que-cest-quun-cms-)
+- [Deuxième partie : installation locale](#deuxieme-partie--installation-locale)
+  * [installation sur un Ubuntu 23.10 - Version longue](#installation-sur-un-ubuntu-2310---version-longue)
+    + [01 - Prérequis](#01---prerequis)
+    + [02 - Création de la base de données MySQL](#02---creation-de-la-base-de-donnees-mysql)
+    + [03 - Installation de WordPress](#03---installation-de-wordpress)
+    + [04 - Finalisation de l'installation](#04---finalisation-de-linstallation)
+  * [installation sur un Ubuntu 23.10 - Version courte (Docker)](#installation-sur-un-ubuntu-2310---version-courte-docker)
+    + [01 - Installation de Docker](#01---installation-de-docker)
+    + [02 - Vérification du status de docker](#02---verification-du-status-de-docker)
+    + [03 - Configuration de Docker pour WordPress](#03---configuration-de-docker-pour-wordpress)
+    + [04 - Lancement de WordPress avec Docker](#04---lancement-de-wordpress-avec-docker)
+    + [Références](#references)
+    + [De quoi WordPress a-t-il besoin pour fonctionner ?](#de-quoi-wordpress-a-t-il-besoin-pour-fonctionner-)
+- [Troisième partie : installation distante](#troisieme-partie--installation-distante)
+  * [Procédure d’installation de WordPress sur une VM distante](#procedure-dinstallation-de-wordpress-sur-une-vm-distante)
+    + [1. Connexion à la machine virtuelle distante](#1-connexion-a-la-machine-virtuelle-distante)
+    + [2. Mise à jour du système](#2-mise-a-jour-du-systeme)
+    + [3. Installation des prérequis](#3-installation-des-prerequis)
+    + [4. Configuration de la base de données MySQL](#4-configuration-de-la-base-de-donnees-mysql)
+    + [5. Téléchargement et configuration de WordPress](#5-telechargement-et-configuration-de-wordpress)
+    + [6. Configuration du serveur web](#6-configuration-du-serveur-web)
+    + [7. Finalisation de l'installation](#7-finalisation-de-linstallation)
+  * [Source :](#source-)
 
 <!-- tocstop -->
 
@@ -39,6 +39,19 @@
 Créé en 2003 par Matt Mullenweg et Mike Little, WordPress est un système de gestion de contenu (CMS) open-source qui permet de créer et de gérer facilement des sites web. Il offre une interface conviviale et une grande flexibilité, ce qui en fait l'une des plateformes les plus populaires pour la création de sites web, qu'ils soient personnels, professionnels ou institutionnels.
 
 Concernant les auteurs, on pourrait dire que le principal contributeur de WordPress est techniquement la communauté mondiale de développeurs, de designers et d'utilisateurs qui contribuent l'amélioration continue de la plateforme.
+
+## Automattic
+
+Automattic est une société multinationale spécialisée dans le développement de logiciels, principalement connue pour être la force motrice derrière WordPress.com, la plateforme d'hébergement de sites web basée sur WordPress. Fondée en 2005 par Matt Mullenweg et Mike Little, Automattic a élargi son éventail de produits pour inclure une gamme diversifiée de services et d'outils liés à la création de contenu en ligne, la gestion de communautés et le commerce électronique.
+
+WordPress, est au cœur de l'écosystème d'Automattic. En plus de WordPress.com, Automattic est également derrière WordPress.org, la plateforme qui distribue le logiciel WordPress gratuitement et qui sert de base à des millions de sites web dans le monde entier.
+
+Au fil des ans, Automattic a acquis de nombreuses entreprises et startups, élargissant ainsi son influence dans le domaine de la publication en ligne et de la création de contenu. Outre WordPress.com, Automattic possède des services tels que WooCommerce, un plugin de commerce électronique pour WordPress, Jetpack, un plugin de sécurité et de performance, ainsi que Tumblr, une plateforme de blogging populaire.
+
+L'entreprise est réputée pour sa culture de travail à distance, avec une grande partie de son personnel travaillant à distance dans le monde entier. Cette approche a contribué à façonner non seulement la façon dont Automattic fonctionne en tant qu'entreprise, mais aussi l'évolution des pratiques de travail à distance dans l'ensemble de l'industrie technologique.
+
+En résumé, Automattic est une société emblématique dans le domaine des logiciels open-source et de la publication en ligne, avec WordPress comme pilier central de son activité et de sa mission de rendre la création de contenu accessible à tous. Son lien étroit avec WordPress en fait une figure majeure dans le paysage numérique moderne.
+
 ## Q&A
 
 * WordPress est-il beaucoup utilisé ?
