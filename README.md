@@ -191,7 +191,7 @@ services:
       WORDPRESS_DB_NAME: wordpress
 volumes:
     db_data: {}
-	wp-content:
+    wp-content:
 ```
 
 3. Enregistrez et fermez le fichier `docker-compose.yml`. 
@@ -299,8 +299,7 @@ sudo systemctl restart apache2
 Dans votre navigateur web, accédez à l'adresse IP de votre machine virtuelle. Vous devriez voir l'assistant d'installation de WordPress. Suivez les instructions à l'écran pour terminer l'installation en fournissant les informations nécessaires.
 
 ---
-changer information d'accès grâce à la DB
-how to append information 
+
 ## Source :
 
 1. **Titre de l'article :** [15 Statistiques Impressionnantes sur WordPress en 2024](https://kinsta.com/fr/blog/statistiques-wordpress/)
