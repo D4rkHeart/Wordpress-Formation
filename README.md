@@ -1,12 +1,44 @@
+# Table of Contents
+
+<!-- toc -->
+
+- [Table of Contents](#table-of-contents)
+- [Première partie : à propos de WordPress](#première-partie--à-propos-de-wordpress)
+  - [Que-est ce que c'est wordpress ?](#que-est-ce-que-cest-wordpress-)
+  - [Q\&A](#qa)
+  - [Qu'est-ce que c'est qu'un CMS ?](#quest-ce-que-cest-quun-cms-)
+- [Deuxième partie : installation locale](#deuxième-partie--installation-locale)
+  - [installation sur un Ubuntu 23.10 - Version longue](#installation-sur-un-ubuntu-2310---version-longue)
+    - [01 - Prérequis](#01---prérequis)
+    - [02 - Création de la base de données MySQL](#02---création-de-la-base-de-données-mysql)
+    - [03 - Installation de WordPress](#03---installation-de-wordpress)
+    - [04 - Finalisation de l'installation](#04---finalisation-de-linstallation)
+  - [installation sur un Ubuntu 23.10 - Version courte (Docker)](#installation-sur-un-ubuntu-2310---version-courte-docker)
+    - [01 - Installation de Docker](#01---installation-de-docker)
+    - [02 - Vérification du status de docker](#02---vérification-du-status-de-docker)
+    - [03 - Configuration de Docker pour WordPress](#03---configuration-de-docker-pour-wordpress)
+    - [04 - Lancement de WordPress avec Docker](#04---lancement-de-wordpress-avec-docker)
+    - [Références](#références)
+    - [De quoi WordPress a-t-il besoin pour fonctionner ?](#de-quoi-wordpress-a-t-il-besoin-pour-fonctionner-)
+- [Troisième partie : installation distante](#troisième-partie--installation-distante)
+  - [Procédure d’installation de WordPress sur une VM distante](#procédure-dinstallation-de-wordpress-sur-une-vm-distante)
+    - [1. Connexion à la machine virtuelle distante](#1-connexion-à-la-machine-virtuelle-distante)
+    - [2. Mise à jour du système](#2-mise-à-jour-du-système)
+    - [3. Installation des prérequis](#3-installation-des-prérequis)
+    - [4. Configuration de la base de données MySQL](#4-configuration-de-la-base-de-données-mysql)
+    - [5. Téléchargement et configuration de WordPress](#5-téléchargement-et-configuration-de-wordpress)
+    - [6. Configuration du serveur web](#6-configuration-du-serveur-web)
+    - [7. Finalisation de l'installation](#7-finalisation-de-linstallation)
+  - [Source :](#source-)
+
+<!-- tocstop -->
 
 # Première partie : à propos de WordPress
-
-## Qu'est-ce que c'est wordpress ?
+## Que-est ce que c'est wordpress ?
 
 Créé en 2003 par Matt Mullenweg et Mike Little, WordPress est un système de gestion de contenu (CMS) open-source qui permet de créer et de gérer facilement des sites web. Il offre une interface conviviale et une grande flexibilité, ce qui en fait l'une des plateformes les plus populaires pour la création de sites web, qu'ils soient personnels, professionnels ou institutionnels.
 
 Concernant les auteurs, on pourrait dire que le principal contributeur de WordPress est techniquement la communauté mondiale de développeurs, de designers et d'utilisateurs qui contribuent l'amélioration continue de la plateforme.
-
 ## Q&A
 
 * WordPress est-il beaucoup utilisé ?
@@ -16,7 +48,7 @@ Concernant les auteurs, on pourrait dire que le principal contributeur de WordPr
 * Quelle est la différence entre wordpress.com et wordpress.org ?
 	* La [principale différence entre WordPress.com et WordPress.org](https://wpvip.com/2023/02/16/wordpress-org-vs-wordpress-com-vs-wordpress-vip-whats-the-difference/) réside dans l'hébergement et le contrôle du site. WordPress.com offre un service d'hébergement intégré avec divers plans payants, ce qui signifie que votre site sera hébergé sur les serveurs de WordPress.com et que vous aurez accès à des fonctionnalités spécifiques selon votre abonnement. En revanche, WordPress.org fournit uniquement le logiciel WordPress lui-même, que vous devez installer sur un serveur d'hébergement web tiers que vous choisissez et gérez vous-même. Cela offre une plus grande liberté et personnalisation, mais nécessite également plus de connaissances techniques et peut impliquer des coûts supplémentaires pour l'hébergement. 
 
-## Qu'est-ce que c'est un CMS 
+## Qu'est-ce que c'est qu'un CMS ?
 
 C'est un système de gestion de contenu (**C**ontent **M**anagement **S**ystem) est une application logicielle qui permet de créer, de modifier et de gérer le contenu d'un site web, sans nécessiter de connaissances en programmation ou en développement web. Les CMS fournissent une interface conviviale qui permet aux utilisateurs de créer et d'organiser du contenu textuel, des images, des vidéos, etc., et de le publier sur un site web avec facilité. Ils offrent également souvent des fonctionnalités telles que la gestion des utilisateurs, des thèmes et des extensions pour étendre les fonctionnalités du site. Les CMS sont largement utilisés pour créer une grande variété de sites web, allant des blogs personnels aux sites d'entreprises en passant par les sites de e-commerce.
 
