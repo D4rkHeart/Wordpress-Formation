@@ -192,28 +192,111 @@ WordPress nécessite les éléments suivants pour fonctionner correctement :
 * ***PHP :** WordPress est écrit en PHP, donc un interpréteur PHP est nécessaire pour exécuter son code.
 
 --- 
+# Troisième partie : installation distante
+## Procédure d’installation de WordPress sur une VM distante
+
+L'installation de WordPress sur une machine virtuelle distante peut sembler complexe, mais en suivant ces étapes, vous pourrez le faire de manière précise, même avec peu de connaissances en informatique.
+
+### 1. Connexion à la machine virtuelle distante
+
+Connectez-vous à la machine virtuelle distante à l'aide de votre clé SSH et de l'adresse IP fournie par l'hébergeur. Utilisez un terminal ou un émulateur de terminal pour accéder à la ligne de commande de la machine distante.
+
+### 2. Mise à jour du système
+
+Avant d'installer quoi que ce soit, assurez-vous que le système est à jour en exécutant les commandes suivantes :
+
+```bash
+sudo apt update 
+sudo apt upgrade -y
+```
+### 3. Installation des prérequis
+
+WordPress nécessite un serveur web (comme Apache ou Nginx), PHP et une base de données MySQL. Pour les installer, exécutez les commandes suivantes :
+
+```bash
+sudo apt install apache2 php mysql-server php-mysql
+```
+
+### 4. Configuration de la base de données MySQL
+
+Créez une base de données MySQL et un utilisateur pour WordPress en exécutant les commandes suivantes :
+
+```bash
+sudo mysql -u root -p
+```
+
+Entrez votre mot de passe MySQL lorsque vous y êtes invité. Ensuite, exécutez ces commandes MySQL :
+
+```sql
+CREATE DATABASE wordpress; CREATE USER 'wordpressuser'@'localhost' IDENTIFIED BY 'votre_mot_de_passe'; GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressuser'@'localhost'; FLUSH PRIVILEGES; EXIT;`
+```
+
+Assurez-vous de remplacer `'votre_mot_de_passe'` par un mot de passe sécurisé.
+
+### 5. Téléchargement et configuration de WordPress
+
+Téléchargez la dernière version de WordPress et extrayez-la dans le répertoire `/var/www/html` en exécutant les commandes suivantes :
+
+```bash
+cd /tmp 
+wget -c https://wordpress.org/latest.tar.gz 
+tar -xzvf latest.tar.gz 
+sudo mv wordpress /var/www/html/
+```
+
+Créez un fichier de configuration WordPress en copiant le fichier d'exemple :
+
+```bash
+cd /var/www/html/wordpress 
+sudo cp wp-config-sample.php wp-config.php
+```
+
+Ouvrez `wp-config.php` dans un éditeur de texte et configurez-le en fournissant les détails de la base de données MySQL que vous avez configurée précédemment.)
+
+### 6. Configuration du serveur web
+
+Pour qu'Apache serve correctement WordPress, vous devez activer le module `rewrite` et redémarrer le service. Exécutez les commandes suivantes :
+
+```bash
+sudo a2enmod rewrite 
+sudo systemctl restart apache2
+```
+
+### 7. Finalisation de l'installation
+
+Dans votre navigateur web, accédez à l'adresse IP de votre machine virtuelle. Vous devriez voir l'assistant d'installation de WordPress. Suivez les instructions à l'écran pour terminer l'installation en fournissant les informations nécessaires.
+
+---
+changer information d'accès grâce à la DB
+how to append information 
+## Source :
+
 1. **Titre de l'article :** [15 Statistiques Impressionnantes sur WordPress en 2024](https://kinsta.com/fr/blog/statistiques-wordpress/)
    **Auteur :** Randy A. Brown
-   **Date de publication :** 3 janvier 2024  
-   **Site :** Kinsta Blog  
+   **Date de publication :** 3 janvier 2024
+   **Site :** Kinsta Blog
 
-2. **Titre de l'article :** [WordPress.org vs WordPress.com vs WordPress VIP: What’s the Difference?](https://wpvip.com/2023/02/16/wordpress-org-vs-wordpress-com-vs-wordpress-vip-whats-the-difference/)  
+2. **Titre de l'article :** [WordPress.org vs WordPress.com vs WordPress VIP: What’s the Difference?](https://wpvip.com/2023/02/16/wordpress-org-vs-wordpress-com-vs-wordpress-vip-whats-the-difference/)
    **Auteur :** Non spécifié  
    **Date de publication :** 16 février 2023  
    **Site :** WordPress VIP  
 
-3. **Titre de l'article :** [WordPress VIP: une plateforme de contenu agile](https://wpvip.com/wordpress-vip-agile-content-platform/?utm_source=WordPresscom&utm_medium=automattic_referral&utm_campaign=top_nav#discover-pricing)  
-   **Auteur :** Non spécifié  
-   **Site :** WordPress VIP  
+3. **Titre de l'article :** [WordPress VIP: une plateforme de contenu agile](https://wpvip.com/wordpress-vip-agile-content-platform/?utm_source=WordPresscom&utm_medium=automattic_referral&utm_campaign=top_nav#discover-pricing)
+   **Auteur :** Non spécifié
+   **Site :** WordPress VIP
 
-4. **Titre de la page :** [Tarification](https://wpvip.com/pricing/)  
-   **Auteur :** Non spécifié  
-   **Site :** WordPress VIP  
+4. **Titre de la page :** [Tarification](https://wpvip.com/pricing/)
+   **Auteur :** Non spécifié
+   **Site :** WordPress VIP
 
 5. **Site :** [WP Mayor](https://wpmayor.com/)
 
 6. **Site :** [Documentation WordPress](https://wordpress.org/documentation/)
 
 7. **Site :** [WPShout](https://wpshout.com/)
-
+   
 8. **Site :** [WPBeginner](https://www.wpbeginner.com/)
+
+9. **Site** : [Documentation Docker](https://docs.docker.com/guides/)
+   
+10. **Site** :[Site officiel de WordPress](https://wordpress.org/)
