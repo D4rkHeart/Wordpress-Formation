@@ -33,6 +33,17 @@
   - [À la découverte de WordPress](#à-la-découverte-de-wordpress)
     - [Copie d’écran d'une partie du site :](#copie-décran-dune-partie-du-site-)
     - [Que manque-t-il pour que mon site soit opérationnel ?](#que-manque-t-il-pour-que-mon-site-soit-opérationnel-)
+- [Quatrième partie : développement avec Docker (Dev)](#quatrième-partie--développement-avec-docker-dev)
+  - [Différence entre conteneurisation et virtualisation :](#différence-entre-conteneurisation-et-virtualisation-)
+  - [Commandes principales pour utiliser Docker et lancer WordPress :](#commandes-principales-pour-utiliser-docker-et-lancer-wordpress-)
+  - [installation sur un Ubuntu 23.10 - Version courte (Docker)](#installation-sur-un-ubuntu-2310---version-courte-docker-1)
+    - [01 - Installation de Docker](#01---installation-de-docker-1)
+    - [02 - Vérification du status de docker](#02---vérification-du-status-de-docker-1)
+    - [03 - Configuration de Docker pour WordPress](#03---configuration-de-docker-pour-wordpress-1)
+    - [04 - Lancement de WordPress avec Docker](#04---lancement-de-wordpress-avec-docker-1)
+  - [Explication des termes Docker :](#explication-des-termes-docker-)
+  - [Entrer dans un conteneur Docker :](#entrer-dans-un-conteneur-docker-)
+  - [ER Diagram](#er-diagram)
   - [Source :](#source-)
 
 <!-- tocstop -->
@@ -369,6 +380,115 @@ Pour rendre votre site pleinement opérationnel et prêt à accueillir un trafic
 6. **Suivi des performances :** Utilisez des outils d'analyse web pour surveiller les performances de votre site, y compris le temps de chargement des pages, le taux de rebond, les conversions et d'autres métriques clés. Utilisez ces données pour identifier les domaines à améliorer et optimiser continuellement votre site.
     
 7. **Support technique :** Assurez-vous d'avoir un plan de support technique en place pour résoudre rapidement les problèmes techniques et répondre aux questions des utilisateurs. Cela peut inclure un support par e-mail, un chat en direct ou même un support téléphonique en fonction de vos besoins et de vos ressources disponibles.
+
+# Quatrième partie : développement avec Docker (Dev)
+
+Docker est une plateforme logicielle open-source qui permet de créer, de déployer et de gérer des applications dans des conteneurs. Ces conteneurs sont des environnements légers et portables qui encapsulent tous les éléments nécessaires à l'exécution d'une application, y compris le code, les bibliothèques, les dépendances et les variables d'environnement. Docker simplifie le processus de développement, de distribution et de déploiement des applications en éliminant les problèmes de compatibilité entre les environnements de développement et de production.
+
+## Différence entre conteneurisation et virtualisation :
+
+La conteneurisation est différente de la virtualisation traditionnelle car elle utilise un concept de conteneurs légers qui partagent le même noyau d'exploitation et les mêmes ressources matérielles de l'hôte. Contrairement à la virtualisation, où chaque machine virtuelle nécessite son propre système d'exploitation invité et son propre ensemble de ressources, les conteneurs partagent les ressources du système d'exploitation hôte, ce qui les rend plus rapides à démarrer, plus efficaces en termes de consommation de ressources et plus portables entre les environnements de développement, de test et de production.
+
+## Commandes principales pour utiliser Docker et lancer WordPress :
+
+* `docker pull wordpress` : Télécharge l'image WordPress depuis le registre Docker Hub.
+
+* `docker run --name wordpress -p 8080:80 -d wordpress` : Lance un conteneur WordPress en utilisant l'image téléchargée, en exposant le port 8080 de l'hôte pour accéder à WordPress, et en détachant le conteneur du terminal.
+
+* `docker ps` : Affiche la liste des conteneurs en cours d'exécution.
+
+* `docker stop <container_id>` : Arrête le conteneur spécifié.
+
+* `docker rm <container_id>` : Supprime le conteneur spécifié.
+
+* `docker-compose up -d` : Lance les conteneurs définis dans le fichier docker-compose.yml en mode détaché.
+
+* `docker-compose down` : Arrête et supprime les conteneurs définis dans le fichier docker-compose.yml.
+
+## installation sur un Ubuntu 23.10 - Version courte (Docker)
+
+### 01 - Installation de Docker  
+Assurez-vous d'avoir Docker installé sur votre système Ubuntu. Si ce n'est pas le cas, vous pouvez suivre les instructions d'installation sur le site officiel de Docker : [Installation de Docker sur Ubuntu](https://docs.docker.com/engine/install/ubuntu/).  
+
+### 02 - Vérification du status de docker 
+Une fois Docker installé, assurez-vous que le service Docker est en cours d'exécution en utilisant la commande suivante dans votre terminal :    
+```bash
+sudo systemctl status docker
+```
+
+### 03 - Configuration de Docker pour WordPress
+
+1. Créez un nouveau répertoire pour votre installation WordPress :
+```bash
+mkdir wordpress 
+cd wordpress
+```
+
+2. Créez un fichier `docker-compose.yml` dans ce répertoire et ajoutez le contenu suivant :
+```yaml
+version: '3.3'
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - "8080:80"
+    restart: always
+   volumes:
+     - wp-content:/var/www/html/wp-content
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+volumes:
+    db_data: {}
+	wp-content:
+```
+
+3. Enregistrez et fermez le fichier `docker-compose.yml`. 
+
+### 04 - Lancement de WordPress avec Docker
+
+1. Exécutez la commande suivante dans le répertoire où se trouve votre fichier `docker-compose.yml` pour démarrer les conteneurs Docker :
+
+ ``` bash
+   docker-compose up -d
+ ```
+
+2. Une fois les conteneurs démarrés, accédez à votre navigateur web et entrez l'adresse suivante : `http://localhost:8080`. Vous devriez voir l'assistant d'installation de WordPress.
+
+3. Suivez les instructions pour terminer l'installation de WordPress en fournissant les informations nécessaires telles que le nom du site, l'adresse e-mail de l'administrateur, etc.
+
+
+## Explication des termes Docker :
+
+- Dockerfile : Un fichier texte qui contient les instructions pour créer une image Docker.
+- Docker : La plateforme logicielle open-source qui permet de créer, de déployer et de gérer des conteneurs.
+- Docker Compose : Un outil qui permet de définir et de gérer des applications multi-conteneurs dans un fichier YAML.
+- Ports : Des points d'entrée réseau qui permettent à un conteneur Docker d'accepter les connexions externes.
+- Volumes : Des points de stockage persistant qui permettent à un conteneur Docker d'accéder à des données stockées en dehors de son système de fichiers racine.
+- Environnements : Des variables qui peuvent être définies pour configurer le comportement d'un conteneur Docker au moment de son démarrage.
+
+## Entrer dans un conteneur Docker :
+
+Utilisez la commande `docker exec -it <container_id> /bin/bash` pour ouvrir un terminal interactif à l'intérieur du conteneur spécifié.
+
+## ER Diagram
+![ER_Diagram](./images/ER_Diagram.png)
 
 ## Source :
 
