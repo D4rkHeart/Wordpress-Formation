@@ -20,12 +20,20 @@ services:
       - "8080:80"
     restart: always
     volumes:
-      - wp-content:/var/www/html/wp-content
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    ports:
+      - "8081:80"
     environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_DB_NAME: wordpress
+      PMA_HOST: ${PMA_HOST}
+      PMA_PORT: ${PMA_PORT}
+      PMA_USER: ${PMA_USER}
+      PMA_PASSWORD: ${PMA_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
 volumes:
     db_data: {}
     wp-content:
