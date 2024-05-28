@@ -17,7 +17,7 @@ services:
       - db
     image: wordpress:6
     ports:
-      - "8080:80"
+      - "80:80"
     restart: always
     volumes:
       - ./wordpress:/var/www/html
