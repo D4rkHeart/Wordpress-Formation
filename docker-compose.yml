@@ -15,18 +15,24 @@ services:
   wordpress:
     depends_on:
       - db
-    image: wordpress:6
+    build:
+      context: .
+      dockerfile: dockerfile
     ports:
       - "80:80"
+      - "443:443"
     restart: always
     volumes:
       - ./wordpress:/var/www/html
-      - ./certs:/etc/letsencrypt
+      - ./etc/letsencrypt:/certs
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST:-db}
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-CHANGEME}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-CHANGEME}
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-CHANGEME}
+      DOMAIN: ${DOMAIN:-CHANGEME}
+      EMAIL: ${EMAIL:-CHANGEME}
+
 
   phpmyadmin:
     depends_on:
