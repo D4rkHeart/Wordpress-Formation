@@ -44,6 +44,16 @@
   - [Explication des termes Docker :](#explication-des-termes-docker-)
   - [Entrer dans un conteneur Docker :](#entrer-dans-un-conteneur-docker-)
   - [ER Diagram](#er-diagram)
+- [Cinquième partie : déploiement avec Docker (Ops)](#cinquième-partie--déploiement-avec-docker-ops)
+  - [01 - Connexion au serveur (SSH)](#01---connexion-au-serveur-ssh)
+  - [02 - Téléchargement du repository](#02---téléchargement-du-repository)
+  - [03 : Navigation vers le répertoire](#03--navigation-vers-le-répertoire)
+  - [04 : Gnu Make](#04--gnu-make)
+  - [05 : Configuration du fichier .env](#05--configuration-du-fichier-env)
+  - [06 - Lancement de l'application](#06---lancement-de-lapplication)
+  - [07 : Vérification du déploiement](#07--vérification-du-déploiement)
+  - [Étape 7 : Accès au site](#étape-7--accès-au-site)
+  - [Similarité avec le déploiement local](#similarité-avec-le-déploiement-local)
   - [Source :](#source-)
 
 <!-- tocstop -->
@@ -489,7 +499,64 @@ Utilisez la commande `docker exec -it <container_id> /bin/bash` pour ouvrir un t
 
 ## ER Diagram
 ![ER_Diagram](./images/ER_Diagram.png)
+# Cinquième partie : déploiement avec Docker (Ops)
+## 01 - Connexion au serveur (SSH)
 
+```bash
+ssh user@ipAdress
+```
+
+## 02 - Téléchargement du repository
+
+```bash
+git clone https://github.com/D4rkHeart/Wordpress-Formation.git
+```
+
+## 03 : Navigation vers le répertoire
+
+Accédez au répertoire où vous avez transféré vos fichiers. 
+
+Par exemple :
+```bash 
+cd /chemin/vers/votre/dossier`
+```
+
+## 04 : Gnu Make
+
+installer [make](https://www.gnu.org/software/make/manual/make.html) si il n'est pas déjà présent : 
+```bash
+sudo apt -y install make
+```
+
+## 05 : Configuration du fichier .env
+
+Utilisez la commande `make .env` pour copier le `.env.example` et le renommer en `.env`.
+```bash
+make .env
+```
+
+**Assurez-vous que votre fichier `.env` contient les bonnes valeurs pour les variables d'environnement nécessaires, telles que les informations de base de données et les paramètres SSL.** 
+
+Assurez-vous également que le fichier `.env` est **sécurisé** et n'est accessible qu'à des utilisateurs autorisés.
+## 06 - Lancement de l'application 
+
+Une fois le .env configuré il ne vous reste plus qu'a utiliser la commande : 
+```bash
+make up 
+```
+## 07 : Vérification du déploiement
+
+Une fois la commande exécutée, vérifiez que tous les services se sont lancés correctement en utilisant la commande `make ps`. Assurez-vous que tous les conteneurs sont en état "Up".
+
+```bash
+make ps
+```
+
+## Étape 7 : Accès au site
+Utilisez un navigateur web pour accéder à votre site en utilisant l'adresse IP ou le nom de domaine de votre serveur, suivi du port si nécessaire (par exemple, `http://votre_domaine.com:80`). Assurez-vous que le site s'affiche correctement et que toutes les fonctionnalités sont opérationnelles.
+
+## Similarité avec le déploiement local
+Le déploiement en production est en tout point similaire à celui sur mon ordinateur. Toutes les configurations, y compris les services Docker, les volumes persistants, les variables d'environnement, les certificats SSL, les ports exposés et les fonctionnalités de l'application WordPress, sont identiques à celles de mon environnement de développement local.
 ## Source :
 
 1. **Titre de l'article :** [15 Statistiques Impressionnantes sur WordPress en 2024](https://kinsta.com/fr/blog/statistiques-wordpress/)

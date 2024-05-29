@@ -1,16 +1,27 @@
-.PHONY: up stop backup config
+.PHONY: up down config ps
 
-.env:
-	cp .env.example .env
+.env: config
+	@if [ ! -f .env ]; then \
+		cp .env.example .env; \
+	fi
+	@export $(cat .env | xargs)
 
-# Lancer le projet
+
 up: 
-	sudo docker-compose up -d
+	@echo "Démarrage des conteneurs Docker..."
+	docker-compose up -d
 
-stop:
-	sudo docker-compose down
+
+down:
+	@echo "Arrêt des conteneurs Docker..."
+	docker-compose down
+
 
 config:
-	sudo apt install docker
-	sudo apt install docker-compose
+	@echo "Installation de Docker et Docker Compose..."
+	sudo apt update
+	sudo apt install -y docker.io docker-compose
 
+ps:
+	@echo "Liste des conteneurs Docker..."
+	docker ps
