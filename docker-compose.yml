@@ -24,7 +24,6 @@ services:
     restart: always
     volumes:
       - ./wordpress:/var/www/html
-      - ./etc/letsencrypt:/certs
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST:-db}
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-CHANGEME}
