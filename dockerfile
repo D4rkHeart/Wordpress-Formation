@@ -6,12 +6,9 @@ RUN apt-get update && \
 
 COPY configurations.sh /usr/local/bin/configurations.sh
 
-COPY ./plugins/smtp-config.php /var/www/html/wordpress/wp-content/plugins/
-
 RUN touch /var/log/msmtp.log && chown www-data:www-data /var/log/msmtp.log
 
 RUN chmod +x /usr/local/bin/configurations.sh
-RUN ln -sf /usr/bin/msmtp /usr/sbin/sendmail
 
 ENTRYPOINT ["/usr/local/bin/configurations.sh"]
 
